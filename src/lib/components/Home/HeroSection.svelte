@@ -18,20 +18,15 @@
 		<div class="relative ml-auto pt-36">
 			<div class="mx-auto text-center lg:w-2/3">
 				<h1 class="text-5xl font-bold text-gray-900 dark:text-white md:text-6xl xl:text-7xl">
-					Elevate Your Inbox <span class="text-base">with</span>
+					Elevate Your Inbox with
 					<span class="text-primary dark:text-white"
-						>Zenith <span class="text-lg">Mails.</span></span
+						>Zenith Mails.</span
 					>
 				</h1>
-				<p class="mt-8 text-gray-700 dark:text-gray-300">
-					Elevate your email game with WebZenith, the <a
-						href="https://github.com/anasmohammed361/emailer-saas"
-						target="_blank"
-						class="text-primary underline">open source</a
-					> email automation tool. Send personalized emails, automate campaigns, and track performance
-					with ease.
+				<p class="mt-8 text-gray-700 dark:text-gray-300 text-lg">
+					Elevate your email game with Zenith Mails, the open-source email automation tool. Send personalized emails, automate campaigns, and track performance with ease.
 				</p>
-				<div class="mt-16 flex flex-wrap justify-center gap-x-6 gap-y-4">
+				<div class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-4">
 					<a
 						href="/mail"
 						class="relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"

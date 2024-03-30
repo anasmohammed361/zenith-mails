@@ -2,10 +2,11 @@ import { fontFamily } from 'tailwindcss/defaultTheme';
 import flattenColorPalette from 'tailwindcss/lib/util/flattenColorPalette';
 import aspectRatio from '@tailwindcss/aspect-ratio';
 import svgToDataUri from 'mini-svg-data-uri';
-
+import typography from '@tailwindcss/typography';
 /** @type {import('tailwindcss').Config} */
 const config = {
 	plugins: [aspectRatio,
+		typography,
 		addVariablesForColors, function ({ matchUtilities, theme }) {
 			matchUtilities(
 				{

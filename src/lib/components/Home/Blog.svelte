@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
     import Container from "./Container.svelte";
 </script>
 
@@ -69,4 +69,4 @@
           </div>
         </div>
     </Container>
-  </div>
+  </div> -->
