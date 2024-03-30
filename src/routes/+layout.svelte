@@ -3,6 +3,4 @@
 	import '@fontsource-variable/inter'
 </script>
 
-<section class="font-inter">
-	<slot />
-</section>
+	<slot  class="font-inter"/>

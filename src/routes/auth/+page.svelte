@@ -9,14 +9,14 @@
 <section class="grid min-h-screen place-items-center">
 	<div class="space-y-5">
 		<h2
-			class="scroll-m-20 text-center text-3xl font-semibold tracking-tight transition-colors first:mt-0"
+			class="scroll-m-20 text-center text-3xl font-bold tracking-tight transition-colors first:mt-0"
 		>
-			Authenticate with EmailerSaaS
+			Emailer Saas
 		</h2>
-		<Card.Root class="w-full max-w-sm">
+		<Card.Root class="w-96">
 			<Card.Header>
-				<Card.Title class="text-2xl">Authenticate</Card.Title>
-				<Card.Description>Choose your favourite Provider.</Card.Description>
+				<Card.Title class="text-2xl text-center">Authenticate</Card.Title>
+				<Card.Description class="text-center">Choose your favourite Provider.</Card.Description>
 			</Card.Header>
 			<Card.Content class="grid gap-4">
 				<Button
