@@ -9,9 +9,13 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"db:studio": "drizzle-kit studio",
+		"db:migrate": "drizzle-kit push:sqlite --config drizzle.config.ts",
+		"db": "turso dev --db-file cache/local.db"
 	},
 	"devDependencies": {
+		"@iconify/svelte": "^3.1.6",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
@@ -19,6 +23,8 @@
 		"@typescript-eslint/eslint-plugin": "^7.0.0",
 		"@typescript-eslint/parser": "^7.0.0",
 		"autoprefixer": "^10.4.19",
+		"dotenv": "^16.4.5",
+		"drizzle-kit": "^0.20.14",
 		"eslint": "^8.56.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.35.1",
@@ -36,8 +42,14 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@auth/core": "^0.28.1",
+		"@auth/drizzle-adapter": "^0.8.1",
+		"@auth/sveltekit": "0.14.0",
+		"@fontsource-variable/inter": "^5.0.17",
+		"@libsql/client": "^0.6.0",
 		"bits-ui": "^0.21.1",
 		"clsx": "^2.1.0",
+		"drizzle-orm": "^0.30.6",
 		"formsnap": "^1.0.0",
 		"mode-watcher": "^0.3.0",
 		"nodemailer": "^6.9.13",

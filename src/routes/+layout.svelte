@@ -1,5 +1,8 @@
 <script>
-	import "../app.css";
-  </script>
-  
-  <slot />
+	import '../app.pcss';
+	import '@fontsource-variable/inter'
+</script>
+
+<section class="font-inter">
+	<slot />
+</section>
