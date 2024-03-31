@@ -45,6 +45,8 @@ export const actions: Actions = {
 			const res = await Promise.allSettled(promises);
 			const sentMails = res.filter((r) => r.status === 'fulfilled');
 			const failedMails = res.filter((r) => r.status === 'rejected');
+			console.log(res);
+			
 			return {
 				form,
 				success: true,

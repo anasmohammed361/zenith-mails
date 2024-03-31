@@ -35,4 +35,4 @@
 />
 <slot class="font-inter" />
 <Toaster />
-<ModeWatcher defaultMode="dark" />
+<ModeWatcher defaultMode="light" />
