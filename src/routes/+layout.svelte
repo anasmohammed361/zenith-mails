@@ -19,12 +19,12 @@
 		title: 'ZenithMails | Send Automated Mails',
 		description:
 			'Elevate your email game with Zenith Mails, the open-source email automation tool. Send personalized emails, automate campaigns, and track performance with ease.',
-		image: 'https://mailer.webzenith.tech/opengraph.jpg',
+		image: 'https://mailer.webzenith.tech/opengraph.png',
 		url: 'https://mailer.webzneith.tech/',
 		type: 'website',
 		images: [
 			{
-				url: 'https://mailer.webzenith.tech/opengraph.jpg',
+				url: 'https://mailer.webzenith.tech/opengraph.png',
 				width: 800,
 				height: 600,
 				alt: 'OpenGraph'
