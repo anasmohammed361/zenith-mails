@@ -5,7 +5,7 @@ export const formSchema = z.object({
 	contentType: z.enum(['text', 'html']).default('text'),
 	content: z.string().min(5),
 	fromAddress: z.string(),
-	toAddresses: z.string().array().min(1),
+	toAddresses: z.string().email().array().min(1),
 	subject: z.string().min(5),
 	googleSmtpAppPassword: z.string().length(16),
 	googleSmtpUserName: z.string().email(),

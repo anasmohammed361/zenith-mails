@@ -8,7 +8,7 @@
 	export let data;
 	export let form:ActionData;
 	if (form?.success) {
-		toast.success('Email sent successfully');
+		toast.success(form.message);
 	}
     if (form?.failed) {
         toast.error(form.message)

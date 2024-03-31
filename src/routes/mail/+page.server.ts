@@ -13,8 +13,8 @@ export const load: PageServerLoad = async () => {
 export const actions: Actions = {
 	default: async (event) => {
 		const form = await superValidate(event, zod(formSchema));
-        console.log(form.data);
-        
+		console.log(form.data);
+
 		if (!form.valid) {
 			return fail(400, {
 				form
@@ -42,7 +42,16 @@ export const actions: Actions = {
 			);
 		}
 		try {
-			await Promise.allSettled(promises);
+			const res = await Promise.allSettled(promises);
+			const sentMails = res.filter((r) => r.status === 'fulfilled');
+			const failedMails = res.filter((r) => r.status === 'rejected');
+			return {
+				form,
+				success: true,
+				message: `Sent ${res.filter((r) => r.status === 'fulfilled').length} mails , ${res.filter((r) => r.status === 'rejected').length} failed`,
+				sentMails,
+				failedMails
+			};
 		} catch (error) {
 			console.log(error);
 			return {
@@ -51,9 +60,5 @@ export const actions: Actions = {
 				message: 'Error Sending Mails'
 			};
 		}
-		return {
-			form,
-			success: true
-		};
 	}
 };
