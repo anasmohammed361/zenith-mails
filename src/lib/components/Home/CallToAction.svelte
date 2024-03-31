@@ -16,7 +16,7 @@
             width="400"
             height="400"
             src="./images/avatars/avatar.webp"
-            alt="member photo"
+            alt="member"
             class="h-8 w-8 rounded-full object-cover"
           />
           <img
@@ -24,7 +24,7 @@
             width="200"
             height="200"
             src="./images/avatars/avatar-2.webp"
-            alt="member photo"
+            alt="member"
             class="h-12 w-12 rounded-full object-cover"
           />
           <img
@@ -32,7 +32,7 @@
             width="200"
             height="200"
             src="./images/avatars/avatar-3.webp"
-            alt="member photo"
+            alt="member"
             class="z-10 h-16 w-16 rounded-full object-cover"
           />
           <img
@@ -40,7 +40,7 @@
             width="200"
             height="200"
             src="./images/avatars/avatar-4.webp"
-            alt="member photo"
+            alt="member"
             class="relative h-12 w-12 rounded-full object-cover"
           />
           <img
@@ -48,7 +48,7 @@
             width="200"
             height="200"
             src="./images/avatars/avatar-1.webp"
-            alt="member photo"
+            alt="member"
             class="h-8 w-8 rounded-full object-cover"
           />
         </div>
@@ -59,7 +59,7 @@
           </p>
           <div class="flex flex-wrap justify-center gap-6">
             <a
-                href="#"
+                href="/mail"
                 class="relative flex h-12 w-full items-center justify-center px-8 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
               >
                 <span class="relative text-base font-semibold text-white dark:text-dark"
@@ -67,7 +67,7 @@
                 >
               </a>
               <a
-                href="#"
+                href="/mail"
                 class="relative flex h-12 w-full items-center justify-center px-8 before:absolute before:inset-0 before:rounded-full before:border before:border-transparent before:bg-primary/10 before:bg-gradient-to-b before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 dark:before:border-gray-700 dark:before:bg-gray-800 sm:w-max"
               >
                 <span
