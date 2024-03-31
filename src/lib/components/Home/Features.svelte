@@ -78,7 +78,7 @@
             ROI.
           </p>
         </div>
-        <a href="/mamil" class="flex items-center justify-end ">
+        <a href="/" class="flex items-center justify-end ">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
             class="w-5 h-5 -translate-x-4 text-2xl opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100">

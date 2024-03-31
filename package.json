@@ -55,6 +55,7 @@
 		"@libsql/client": "^0.6.0",
 		"@trpc/client": "^10.45.2",
 		"@trpc/server": "^10.45.2",
+		"@vercel/analytics": "^1.2.2",
 		"bits-ui": "^0.21.1",
 		"clsx": "^2.1.0",
 		"cmdk-sv": "^0.0.17",
@@ -78,5 +79,5 @@
 		"type": "git",
 		"url": "https://github.com/anasmohammed361/emailer-saas"
 	},
-	"license":"MIT"
+	"license": "MIT"
 }
