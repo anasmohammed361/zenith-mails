@@ -84,8 +84,16 @@ const config = {
 			fontFamily: {
 				sans: [...fontFamily.sans],
 				inter: ['Inter', ...fontFamily.sans]
-			}
-		}
+			},
+			typography:{
+				DEFAULT:{
+					css:{
+						maxWidth:'100%'
+					}
+				}
+			}	
+		},
+		
 	}
 };
 
