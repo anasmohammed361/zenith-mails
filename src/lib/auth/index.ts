@@ -8,7 +8,7 @@ import {
 	GITHUB_CLIENT_ID,
 	GITHUB_CLIENT_SECRET
 } from '$env/static/private';
-import { db } from '@/db';
+import { db } from '@/db/index.server';
 
 export const { handle:authenticationHandle, signIn, signOut } = SvelteKitAuth({
 	adapter: DrizzleAdapter(db),

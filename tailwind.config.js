@@ -83,7 +83,8 @@ const config = {
 			},
 			fontFamily: {
 				sans: [...fontFamily.sans],
-				inter: ['Inter', ...fontFamily.sans]
+				inter: ['Inter Variable', ...fontFamily.sans],
+				bricolage: ['Bricolage Grotesque Variable', ...fontFamily.sans]
 			}
 		}
 	}

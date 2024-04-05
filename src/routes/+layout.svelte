@@ -1,6 +1,7 @@
 <script>
 	import '../app.pcss';
 	import '@fontsource-variable/inter';
+	import '@fontsource-variable/bricolage-grotesque';
 	import { Toaster } from '$lib/components/ui/sonner';
 	import { ModeWatcher } from 'mode-watcher';
 	import { dev } from '$app/environment';
@@ -33,6 +34,8 @@
 		site_name: 'ZenithMails'
 	}}
 />
-<slot class="font-inter" />
+<main class="font-bricolage">
+	<slot />
+</main>
 <Toaster />
 <ModeWatcher defaultMode="light" />
