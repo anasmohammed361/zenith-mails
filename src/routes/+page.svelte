@@ -6,7 +6,6 @@
 	import Testimonials from '@/components/Home/Testimonials.svelte';
 	import Stats from '@/components/Home/Stats.svelte';
 	import Header from '@/components/layouts/Header.svelte';
-	
 </script>
 <Header />
 <main class="space-y-40 mb-40">
