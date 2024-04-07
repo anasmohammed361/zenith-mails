@@ -35,7 +35,6 @@
 		image: 'https://mailer.webzenith.tech/opengraph.png',
 		url: 'https://mailer.webzneith.tech/',
 		type: 'website',
-
 		images: [
 			{
 				url: 'https://mailer.webzenith.tech/opengraph.png',

@@ -5,20 +5,15 @@
 	import { cn } from '@/utils';
 	import { z } from 'zod';
 	import { toast } from 'svelte-sonner';
-	export let inputTags: string[];
+	export let inputTags: string[]=[];
 	import * as Form from '$lib/components/ui/form';
 	import type { SuperForm } from 'sveltekit-superforms';
-	
-	export let form: SuperForm<{
-		provider: 'google';
-		contentType: 'text' | 'html';
-		content: string;
-		fromAddress: string;
-		toAddresses: string[];
-		subject: string;
-		googleSmtpAppPassword: string;
-		googleSmtpUserName: string;
-	}>;
+
+	export let form: SuperForm<
+		{
+			toAddresses: string[];
+		} & any
+	>;
 	let currentInput = '';
 	function add() {
 		if (!z.string().email().safeParse(currentInput).success) {
@@ -33,7 +28,7 @@
 		currentInput = '';
 	}
 	function remove(index: number) {
-		inputTags = inputTags.filter((_, i) => i !== index);
+		inputTags = inputTags?.filter((_, i) => i !== index);
 	}
 </script>
 
@@ -42,7 +37,7 @@
 		class="text-magnum-700 focus-within:ring-magnum-400 flex min-h-10 min-w-[280px] flex-row flex-wrap gap-2.5 rounded-md bg-primary-foreground px-3
       py-2 focus-within:ring"
 	>
-		{#if inputTags.length === 0}
+		{#if inputTags?.length === 0}
 			<p class="text-sm text-muted-foreground">
 				Your Emails are listed here. Start typing Below.....
 			</p>
@@ -51,22 +46,24 @@
 				<Form.ElementField {form} name="toAddresses[{i}]">
 					<Form.Control let:attrs>
 						<div
-						transition:fade={{ duration: 300 }}
-						class={cn(badgeVariants({ variant: 'default' }),`hover:bg-primary cursor-pointer`)}
+							transition:fade={{ duration: 300 }}
+							class={cn(badgeVariants({ variant: 'default' }), `cursor-pointer hover:bg-primary`)}
 						>
-					
-						<input
-						{...attrs}
-						type="text"
-						class="flex items-center border-r border-white/10 bg-primary px-1.5 hover:bg-primary"
-						bind:value={inputTags[i]}
-						/>
-						<Form.FieldErrors />
-						<button on:click={()=>remove(i)} class="enabled:hover:bg-magnum-300 flex h-full items-center px-1">
-							<Icon icon="ri:close-fill" class="size-3" />
-						</button>
-					</div>
-				</Form.Control>
+							<input
+								{...attrs}
+								type="text"
+								class="flex items-center border-r border-white/10 bg-primary px-1.5 hover:bg-primary"
+								bind:value={inputTags[i]}
+							/>
+							<Form.FieldErrors />
+							<button
+								on:click={() => remove(i)}
+								class="enabled:hover:bg-magnum-300 flex h-full items-center px-1"
+							>
+								<Icon icon="ri:close-fill" class="size-3" />
+							</button>
+						</div>
+					</Form.Control>
 				</Form.ElementField>
 			{/each}
 		{/if}
@@ -79,7 +76,7 @@
 			on:keydown={(e) => {
 				if (e.key === 'Enter') {
 					add();
-					e.preventDefault()
+					e.preventDefault();
 				}
 			}}
 			placeholder="Enter Emails..."

@@ -20,33 +20,55 @@ export const actions: Actions = {
 				form
 			});
 		}
-		const transport = nodemailer.createTransport({
-			host: 'smtp.gmail.com',
-			port: 465,
-			secure: true,
-			auth: {
-				user: form.data.googleSmtpUserName,
-				pass: form.data.googleSmtpAppPassword
-			}
-		});
 		const promises = [];
-		for (const to of form.data.toAddresses) {
-			promises.push(
-				transport.sendMail({
-					from: form.data.fromAddress,
-					to,
-					subject: form.data.subject,
-					text: form.data.contentType === 'text' ? form.data.content : undefined,
-					html: form.data.contentType === 'html' ? form.data.content : undefined
-				})
-			);
+		
+		if (form.data.provider === 'google') {
+			const transport = nodemailer.createTransport({
+				host: 'smtp.gmail.com',
+				port: 465,
+				secure: true,
+				auth: {
+					user: form.data.googleSmtpUserName,
+					pass: form.data.googleSmtpAppPassword
+				}
+			});
+			for (const to of form.data.toAddresses) {
+				promises.push(
+					transport.sendMail({
+						from: form.data.fromAddress,
+						to,
+						subject: form.data.subject,
+						text: form.data.contentType === 'text' ? form.data.content : undefined,
+						html: form.data.contentType === 'html' ? form.data.content : undefined
+					})
+				);
+			}
+		}else if (form.data.provider === 'custom') {
+			const transport = nodemailer.createTransport({
+				host: form.data.smtpServer,
+				port: form.data.smtpPort,
+				secure: form.data.ssl,
+				auth: {
+					user: form.data.smtpUserName,
+					pass: form.data.smtpPassword
+				}
+			});
+			for (const to of form.data.toAddresses) {
+				promises.push(
+					transport.sendMail({
+						from: form.data.fromAddress,
+						to,
+						subject: form.data.subject,
+						text: form.data.contentType === 'text' ? form.data.content : undefined,
+						html: form.data.contentType === 'html' ? form.data.content : undefined
+					})
+				);
+			}
 		}
 		try {
 			const res = await Promise.allSettled(promises);
 			const sentMails = res.filter((r) => r.status === 'fulfilled');
 			const failedMails = res.filter((r) => r.status === 'rejected');
-			console.log(res);
-			
 			return {
 				form,
 				success: true,

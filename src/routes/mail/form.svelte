@@ -9,11 +9,13 @@
 	import { Textarea } from '@/components/ui/textarea';
 	import { Separator } from '$lib/components/ui/separator';
 	import { Button } from '@/components/ui/button';
+	import Checkbox from '@/components/ui/checkbox/checkbox.svelte';
+	import * as Alert from '$lib/components/ui/alert/index.js';
+	import Icon from '@iconify/svelte';
 	export let data: SuperValidated<Infer<FormSchema>>;
 
 	const form = superForm(data, {
-		validators: zodClient(formSchema),
-        
+		validators: zodClient(formSchema)
 	});
 
 	const { form: formData, enhance } = form;
@@ -29,7 +31,6 @@
 				value: $formData.contentType
 			}
 		: undefined;
-  
 </script>
 
 <form method="POST" use:enhance>
@@ -54,7 +55,7 @@
 		<Form.Description>Press Enter after typing in your email.</Form.Description>
 		<Form.FieldErrors />
 	</Form.Field>
- 
+
 	<Form.Field {form} name="subject">
 		<Form.Control let:attrs>
 			<Form.Label>Subject</Form.Label>
@@ -115,50 +116,110 @@
 				}}
 			>
 				<Select.Trigger {...attrs}>
-					<Select.Value class="capitalize" placeholder="Select a verified email to display" />
+					<Select.Value class="capitalize" placeholder="Select a Provider" />
 				</Select.Trigger>
 				<Select.Content>
 					<Select.Item value="google" label="Google" />
+					<Select.Item value="custom" label="Custom" />
 				</Select.Content>
 			</Select.Root>
 			<input hidden bind:value={$formData.provider} name={attrs.name} />
 		</Form.Control>
-		<Form.Description>Currently We only support Google SMTP Server.</Form.Description>
+		<Form.Description>Choose your SMTP Provider.</Form.Description>
 		<Form.FieldErrors />
 	</Form.Field>
-    <Form.Field {form} name="googleSmtpUserName">
-		<Form.Control let:attrs>
-			<Form.Label>SMTP Username</Form.Label>
-			<Input
-				{...attrs}
-				placeholder="Your SMTP Email Address..."
-				bind:value={$formData.googleSmtpUserName}
-			/>
-		</Form.Control>
-		<!-- <Form.Description>This is your public display name.</Form.Description> -->
-		<Form.FieldErrors />
-	</Form.Field>
-	<Form.Field {form} name="googleSmtpAppPassword">
-		<Form.Control let:attrs>
-			<Form.Label>SMTP Password</Form.Label>
-			<Input
-				{...attrs}
-				placeholder="Your Email Subject goes here."
-				bind:value={$formData.googleSmtpAppPassword}
-			/>
-		</Form.Control>
-		<Form.Description
-			>Your Google <a href="https://support.google.com/accounts/answer/185833?hl=en" target="_blank"
-				>App Password</a
-			> goes here.</Form.Description
-		>
-		<Form.FieldErrors />
-	</Form.Field>
-	
+	{#if $formData.provider === 'google'}
+		<Form.Field {form} name="googleSmtpUserName">
+			<Form.Control let:attrs>
+				<Form.Label>SMTP Username</Form.Label>
+				<Input
+					{...attrs}
+					placeholder="Your SMTP Email Address..."
+					bind:value={$formData.googleSmtpUserName}
+				/>
+			</Form.Control>
+			<!-- <Form.Description>This is your public display name.</Form.Description> -->
+			<Form.FieldErrors />
+		</Form.Field>
+		<Form.Field {form} name="googleSmtpAppPassword">
+			<Form.Control let:attrs>
+				<Form.Label>SMTP Password</Form.Label>
+				<Input
+					{...attrs}
+					placeholder="Your Email Subject goes here."
+					bind:value={$formData.googleSmtpAppPassword}
+				/>
+			</Form.Control>
+			<Form.Description
+				>Your Google <a
+					href="https://support.google.com/accounts/answer/185833?hl=en"
+					target="_blank">App Password</a
+				> goes here.</Form.Description
+			>
+			<Form.FieldErrors />
+		</Form.Field>
+	{:else if $formData.provider === 'custom'}
+		<Form.Field {form} name="smtpHost">
+			<Form.Control let:attrs>
+				<Form.Label>SMTP Host</Form.Label>
+				<Input {...attrs} placeholder="Your SMTP Host..." bind:value={$formData.smtpHost} />
+			</Form.Control>
+			<!-- <Form.Description>This is your public display name.</Form.Description> -->
+			<Form.FieldErrors />
+		</Form.Field>
+		<Form.Field {form} name="smtpUserName">
+			<Form.Control let:attrs>
+				<Form.Label>SMTP Username</Form.Label>
+				<Input {...attrs} placeholder="Your SMTP Username..." bind:value={$formData.smtpUserName} />
+			</Form.Control>
+			<!-- <Form.Description>This is your public display name.</Form.Description> -->
+			<Form.FieldErrors />
+		</Form.Field>
+		<Form.Field {form} name="smtpPassword">
+			<Form.Control let:attrs>
+				<Form.Label>SMTP Password</Form.Label>
+				<Input
+					{...attrs}
+					placeholder="Your Email Subject goes here."
+					bind:value={$formData.smtpPassword}
+					type="password"
+				/>
+			</Form.Control>
+			<Form.Description>We don't store any of your passwords.</Form.Description>
+			<Form.FieldErrors />
+		</Form.Field>
+		<Form.Field {form} name="smtpPort">
+			<Form.Control let:attrs>
+				<Form.Label>SMTP Port</Form.Label>
+				<Input
+					{...attrs}
+					type="number"
+					placeholder="Your SMTP Port..."
+					bind:value={$formData.smtpPort}
+				/>
+			</Form.Control>
+			<!-- <Form.Description>This is your public display name.</Form.Description> -->
+			<Form.FieldErrors />
+		</Form.Field>
+		<Form.Field {form} name="ssl">
+			<Form.Control let:attrs>
+				<Checkbox bind:checked={$formData.ssl} />
+				<Form.Label>Use SSL</Form.Label>
+			</Form.Control>
+			<Form.FieldErrors />
+		</Form.Field>
+	{:else}
+		<Alert.Root variant='destructive' class="my-10">
+			<Icon icon="zondicons:exclamation-outline" class="size-4" />
+			<Alert.Title>Heads up!</Alert.Title>
+			<Alert.Description>You can add components to your app using the cli.</Alert.Description>
+		</Alert.Root>
+	{/if}
+
 	<div class="flex justify-end">
 		<Button
-            type="submit"
-			class="flex cursor-pointer items-center gap-1 rounded-md bg-blue-500 px-4 py-2  transition-all font-semibold tracking-widest text-white duration-300 hover:translate-x-1 hover:gap-1 hover:bg-blue-400"
+			type="submit"
+			class="flex cursor-pointer items-center gap-1 rounded-md bg-blue-500 px-4 py-2  font-semibold tracking-widest text-white transition-all duration-300 hover:translate-x-1 hover:gap-1 hover:bg-blue-400"
 			>Send
 			<svg
 				class="h-5 w-5"
