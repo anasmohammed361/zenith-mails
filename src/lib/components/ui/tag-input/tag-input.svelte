@@ -42,7 +42,7 @@
 				Your Emails are listed here. Start typing Below.....
 			</p>
 		{:else}
-			{#each inputTags as t, i}
+			{#each inputTags ?? [] as t, i}
 				<Form.ElementField {form} name="toAddresses[{i}]">
 					<Form.Control let:attrs>
 						<div

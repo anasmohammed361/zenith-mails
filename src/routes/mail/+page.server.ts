@@ -13,8 +13,6 @@ export const load: PageServerLoad = async () => {
 export const actions: Actions = {
 	default: async (event) => {
 		const form = await superValidate(event, zod(formSchema));
-		console.log(form.data);
-
 		if (!form.valid) {
 			return fail(400, {
 				form
@@ -28,8 +26,8 @@ export const actions: Actions = {
 				port: 465,
 				secure: true,
 				auth: {
-					user: form.data.googleSmtpUserName,
-					pass: form.data.googleSmtpAppPassword
+					user: form.data.smtpUserName,
+					pass: form.data.smtpPassword
 				}
 			});
 			for (const to of form.data.toAddresses) {
@@ -39,19 +37,29 @@ export const actions: Actions = {
 						to,
 						subject: form.data.subject,
 						text: form.data.contentType === 'text' ? form.data.content : undefined,
-						html: form.data.contentType === 'html' ? form.data.content : undefined
+						html: form.data.contentType === 'html' ? form.data.content : undefined,
+						attachments: form.data.attachments.map((url) => {
+							return {
+								path: url
+							};
+						})
 					})
 				);
 			}
 		}else if (form.data.provider === 'custom') {
 			const transport = nodemailer.createTransport({
-				host: form.data.smtpServer,
+				host: form.data.smtpHost,
 				port: form.data.smtpPort,
 				secure: form.data.ssl,
 				auth: {
 					user: form.data.smtpUserName,
 					pass: form.data.smtpPassword
-				}
+				},
+				attachments: form.data.attachments.map((url) => {
+					return {
+						path: url
+					};
+				})
 			});
 			for (const to of form.data.toAddresses) {
 				promises.push(
@@ -67,14 +75,10 @@ export const actions: Actions = {
 		}
 		try {
 			const res = await Promise.allSettled(promises);
-			const sentMails = res.filter((r) => r.status === 'fulfilled');
-			const failedMails = res.filter((r) => r.status === 'rejected');
 			return {
 				form,
 				success: true,
 				message: `Sent ${res.filter((r) => r.status === 'fulfilled').length} mails , ${res.filter((r) => r.status === 'rejected').length} failed`,
-				sentMails,
-				failedMails
 			};
 		} catch (error) {
 			console.log(error);

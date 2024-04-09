@@ -1,5 +1,6 @@
 <script lang="ts">
 	import * as Form from '$lib/components/ui/form';
+
 	import { Input } from '$lib/components/ui/input';
 	import * as Select from '$lib/components/ui/select';
 	import { type SuperValidated, type Infer, superForm } from 'sveltekit-superforms';
@@ -12,13 +13,32 @@
 	import Checkbox from '@/components/ui/checkbox/checkbox.svelte';
 	import * as Alert from '$lib/components/ui/alert/index.js';
 	import Icon from '@iconify/svelte';
+
 	export let data: SuperValidated<Infer<FormSchema>>;
+	const handleSubmit = async () => {
+		$formData.attachments = $formData.attachments.filter((url) => url);
+		console.log({ $formData });
+		
+		if ($formData.provider === 'google') {
+			$formData.smtpHost = 'smtp.gmail.com';
+			$formData.smtpPort = 465;
+			$formData.ssl = true;
+		}
+		submit();
+	};
 
 	const form = superForm(data, {
 		validators: zodClient(formSchema)
 	});
 
-	const { form: formData, enhance } = form;
+	function removeUrlByIndex(index: number) {
+		$formData.attachments = $formData.attachments.filter((_, i) => i !== index);
+	}
+
+	function addUrl() {
+		$formData.attachments = [...$formData.attachments, ''];
+	}
+	const { form: formData, enhance, submit } = form;
 	$: selectedEmail = $formData.provider
 		? {
 				label: $formData.provider,
@@ -31,6 +51,7 @@
 				value: $formData.contentType
 			}
 		: undefined;
+	$formData.attachments = $formData.attachments ?? [''];
 </script>
 
 <form method="POST" use:enhance>
@@ -43,14 +64,12 @@
 				bind:value={$formData.fromAddress}
 			/>
 		</Form.Control>
-		<!-- <Form.Description></Form.Description> -->
 		<Form.FieldErrors />
 	</Form.Field>
 	<Form.Field {form} name="toAddresses">
 		<Form.Control let:attrs>
 			<Form.Label>To Address</Form.Label>
 			<TagInput {form} bind:inputTags={$formData.toAddresses} />
-			<!-- <Input {...attrs} bind:value={$formData.toAddresses} /> -->
 		</Form.Control>
 		<Form.Description>Press Enter after typing in your email.</Form.Description>
 		<Form.FieldErrors />
@@ -65,7 +84,7 @@
 				bind:value={$formData.subject}
 			/>
 		</Form.Control>
-		<!-- <Form.Description>This is your public display name.</Form.Description> -->
+
 		<Form.FieldErrors />
 	</Form.Field>
 	<Form.Field {form} name="contentType">
@@ -101,9 +120,38 @@
 				bind:value={$formData.content}
 			/>
 		</Form.Control>
-		<!-- <Form.Description>This is your public display name.</Form.Description> -->
 		<Form.FieldErrors />
 	</Form.Field>
+	<Form.FormFieldset {form} name="attachments">
+		<Form.Control>
+			<Form.Label>Attachments</Form.Label>
+			{#each $formData.attachments ?? [] as _, i}
+				<Form.ElementField {form} name="attachments[{i}]">
+					<Form.Control let:attrs>
+						<dir class="flex gap-3">
+							<Input
+								class="grow"
+								{...attrs}
+								placeholder="Paste url of your documents to attach."
+								bind:value={$formData.attachments[i]}
+							/>
+							<Button size="icon" variant="outline" on:click={() => removeUrlByIndex(i)}>
+								<Icon icon="fluent:delete-32-filled" class="size-6" />
+							</Button>
+						</dir>
+						<Form.FieldErrors />
+					</Form.Control>
+				</Form.ElementField>
+			{/each}
+		</Form.Control>
+		<Form.Description>Attach files to your email.</Form.Description>
+		<Form.FieldErrors />
+		<div class="flex justify-end">
+			<Button size="icon" variant="outline" on:click={addUrl}>
+				<Icon icon="gg:add" class="size-6" />
+			</Button>
+		</div>
+	</Form.FormFieldset>
 
 	<Separator class="my-10" />
 	<Form.Field {form} name="provider">
@@ -129,25 +177,25 @@
 		<Form.FieldErrors />
 	</Form.Field>
 	{#if $formData.provider === 'google'}
-		<Form.Field {form} name="googleSmtpUserName">
+		<Form.Field {form} name="smtpUserName">
 			<Form.Control let:attrs>
 				<Form.Label>SMTP Username</Form.Label>
 				<Input
 					{...attrs}
 					placeholder="Your SMTP Email Address..."
-					bind:value={$formData.googleSmtpUserName}
+					bind:value={$formData.smtpUserName}
 				/>
 			</Form.Control>
 			<!-- <Form.Description>This is your public display name.</Form.Description> -->
 			<Form.FieldErrors />
 		</Form.Field>
-		<Form.Field {form} name="googleSmtpAppPassword">
+		<Form.Field {form} name="smtpPassword">
 			<Form.Control let:attrs>
 				<Form.Label>SMTP Password</Form.Label>
 				<Input
 					{...attrs}
 					placeholder="Your Email Subject goes here."
-					bind:value={$formData.googleSmtpAppPassword}
+					bind:value={$formData.smtpPassword}
 				/>
 			</Form.Control>
 			<Form.Description
@@ -203,22 +251,22 @@
 		</Form.Field>
 		<Form.Field {form} name="ssl">
 			<Form.Control let:attrs>
-				<Checkbox bind:checked={$formData.ssl} />
+				<Checkbox {...attrs} bind:checked={$formData.ssl} />
 				<Form.Label>Use SSL</Form.Label>
 			</Form.Control>
 			<Form.FieldErrors />
 		</Form.Field>
 	{:else}
-		<Alert.Root variant='destructive' class="my-10">
+		<Alert.Root variant="destructive" class="my-10">
 			<Icon icon="zondicons:exclamation-outline" class="size-4" />
-			<Alert.Title>Heads up!</Alert.Title>
-			<Alert.Description>You can add components to your app using the cli.</Alert.Description>
+			<Alert.Title>No Provider!</Alert.Title>
+			<Alert.Description>Please Choose a Provider before configuring SMTP.</Alert.Description>
 		</Alert.Root>
 	{/if}
 
 	<div class="flex justify-end">
 		<Button
-			type="submit"
+			on:click={handleSubmit}
 			class="flex cursor-pointer items-center gap-1 rounded-md bg-blue-500 px-4 py-2  font-semibold tracking-widest text-white transition-all duration-300 hover:translate-x-1 hover:gap-1 hover:bg-blue-400"
 			>Send
 			<svg
