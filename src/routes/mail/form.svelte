@@ -17,7 +17,7 @@
 	export let data: SuperValidated<Infer<FormSchema>>;
 	const handleSubmit = async () => {
 		$formData.attachments = $formData.attachments.filter((url) => url);
-		console.log({ $formData });
+		$formData.smtpPort = Number($formData.smtpPort);
 		
 		if ($formData.provider === 'google') {
 			$formData.smtpHost = 'smtp.gmail.com';

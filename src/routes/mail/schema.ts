@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const formSchema = z
 	.object({
-		provider: z.literal('google'),
+		provider: z.enum(['google', 'custom']),
 		contentType: z.enum(['text', 'html']).default('text'),
 		content: z.string().min(5),
 		fromAddress: z.string(),
