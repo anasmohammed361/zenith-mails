@@ -5,16 +5,21 @@
 	import { cn } from '@/utils';
 	import { z } from 'zod';
 	import { toast } from 'svelte-sonner';
-	export let inputTags: string[]=[];
+	export let inputTags: string[] = [];
 	import * as Form from '$lib/components/ui/form';
 	import type { SuperForm } from 'sveltekit-superforms';
-
+	import { read, utils } from 'xlsx';
+	import Button from '../button/button.svelte';
+	import * as Tooltip from '$lib/components/ui/tooltip/index.js';
+	import { Label } from '../label';
+	import { buttonVariants } from '../button';
 	export let form: SuperForm<
 		{
 			toAddresses: string[];
 		} & any
 	>;
 	let currentInput = '';
+	let files: FileList|null;
 	function add() {
 		if (!z.string().email().safeParse(currentInput).success) {
 			toast.error('Please enter a valid email address');
@@ -29,6 +34,37 @@
 	}
 	function remove(index: number) {
 		inputTags = inputTags?.filter((_, i) => i !== index);
+	}
+	function handleFileChange(e: Event & {
+    currentTarget: EventTarget & HTMLInputElement;
+}) {
+		if (e.currentTarget.files && e.currentTarget.files.length > 0) {
+			const file = e.currentTarget.files.item(0)!;
+			const reader = new FileReader();
+			reader.onload = (e) => {
+				const data = e.target?.result as string;
+				const workbook = read(data, { type: 'binary' });
+				const sheetName = workbook.SheetNames[0];
+				if (!sheetName) {
+					toast.error('No Sheet Name found.');
+					return;
+				}
+				const sheet = workbook.Sheets[sheetName];
+				if (!sheet) {
+					toast.error('No Sheet found.');
+					return;
+				}
+				const jsonData = utils.sheet_to_json(sheet, { header: 1 });
+				console.log(jsonData);
+				
+				const emails= jsonData.flat().filter((e) => z.string().email().safeParse(e).success) as string[];
+				console.log(emails);
+				
+				inputTags = [...inputTags, ...emails];
+				toast.success('Emails added successfully');
+			};
+			reader.readAsBinaryString(file);
+		}
 	}
 </script>
 
@@ -82,6 +118,48 @@
 			placeholder="Enter Emails..."
 			class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
 		/>
-		<!-- <Button size="icon" on:click={add} variant="outline"><Icon icon="mingcute:add-fill" class="size-4" /></Button> -->
+		<!-- <Button size="icon"  variant="outline"
+			></Button
+		> -->
+		<div class="flex gap-2">
+			<Tooltip.Root openDelay={100}>
+				<Tooltip.Trigger asChild let:builder>
+					<Button builders={[builder]} size="icon" variant="outline" class=" p-0 text-white">
+						<Label for="file" class={cn('grid h-full w-full cursor-pointer place-items-center')}
+							><Icon icon="fluent:document-arrow-up-16-filled" class="size-4 " /></Label
+						>
+						<input
+							on:change={handleFileChange}
+							type="file"
+							id="file"
+							name="file"
+							accept=".xlsx"
+							alt="file"
+							class="hidden"
+						/>
+					</Button>
+				</Tooltip.Trigger>
+				<Tooltip.Content>
+					<p>Upload from Xl</p>
+				</Tooltip.Content>
+			</Tooltip.Root>
+			<Tooltip.Root openDelay={100}>
+				<Tooltip.Trigger asChild let:builder>
+					<Button
+						href="/sample_mails_zenith_mails.xlsx"
+						target="_blank"
+						builders={[builder]}
+						size="icon"
+						variant="outline"
+						class=" text-white"
+					>
+						<Icon icon="fluent:document-arrow-down-16-filled" class="size-4" />
+					</Button>
+				</Tooltip.Trigger>
+				<Tooltip.Content>
+					<p>Download Sample Document</p>
+				</Tooltip.Content>
+			</Tooltip.Root>
+		</div>
 	</div>
 </div>
