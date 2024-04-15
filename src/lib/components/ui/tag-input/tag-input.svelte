@@ -124,7 +124,7 @@
 		<div class="flex gap-2">
 			<Tooltip.Root openDelay={100}>
 				<Tooltip.Trigger asChild let:builder>
-					<Button builders={[builder]} size="icon" variant="outline" class=" p-0 text-white">
+					<Button builders={[builder]} size="icon" variant="outline" class=" p-0 ">
 						<Label for="file" class={cn('grid h-full w-full cursor-pointer place-items-center')}
 							><Icon icon="fluent:document-arrow-up-16-filled" class="size-4 " /></Label
 						>
@@ -151,7 +151,7 @@
 						builders={[builder]}
 						size="icon"
 						variant="outline"
-						class=" text-white"
+						class=" "
 					>
 						<Icon icon="fluent:document-arrow-down-16-filled" class="size-4" />
 					</Button>
