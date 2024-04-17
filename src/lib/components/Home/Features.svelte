@@ -1,5 +1,7 @@
 <script lang="ts">
+	import Badge from "../ui/badge/badge.svelte";
   import Container from "./Container.svelte";
+  
 </script>
 
 <div class=" pb-20" id="features">
@@ -31,6 +33,7 @@
             behaviors. Utilize dynamic content and segmentation to deliver targeted messages that
             drive engagement and conversions.
           </p>
+          <Badge>Coming Soon</Badge>
         </div>
         <a href="/mail" class="flex items-center justify-end ">
           
@@ -54,6 +57,7 @@
             customers. Save time and increase conversions by delivering the right message at the
             right time.
           </p>
+          <Badge>Coming Soon</Badge>
         </div>
         <a href="/mail" class="flex items-center justify-end ">
           
@@ -77,6 +81,7 @@
             click-through rates, conversion rates, and more to optimize your campaigns and maximize
             ROI.
           </p>
+          <Badge>Coming Soon</Badge>
         </div>
         <a href="/" class="flex items-center justify-end ">
           
@@ -90,7 +95,7 @@
       </div>
 
       <!-- Fourth feature -->
-      <iv class="group relative bg-muted dark:bg-gray-800 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10 rounded-3xl p-8">
+      <div class="group relative bg-muted dark:bg-gray-800 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10 rounded-3xl p-8">
         <div class="space-y-2">
           <h5 class="text-xl font-semibold text-gray-700 dark:text-white transition ">
             Customizable Templates
@@ -99,9 +104,10 @@
             Choose from a library of customizable email templates or design your own. Create
             eye-catching emails that reflect your brand identity and resonate with your audience.
           </p>
+          <Badge>Coming Soon</Badge>
         </div>
         <a href="/mail" class="flex items-center justify-between group-hover:text-secondary">
-          <span class="text-sm">Read more</span>
+          <!-- <span class="text-sm">Read more</span> -->
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
             class="w-5 h-5 -translate-x-4 text-2xl opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100">
             <path fill-rule="evenodd"
@@ -109,7 +115,7 @@
               clip-rule="evenodd" />
           </svg>
         </a>
-      </iv>
+      </div>
     </div>
   </Container>
 </div>

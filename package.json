@@ -11,7 +11,7 @@
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
 		"db:studio": "drizzle-kit studio",
-		"db:migrate": "drizzle-kit push:sqlite --config drizzle.config.ts",
+		"db:push": "drizzle-kit push:sqlite --config drizzle.config.ts",
 		"db": "turso dev --db-file cache/local.db"
 	},
 	"devDependencies": {
