@@ -23,7 +23,7 @@
     <div
       class="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <!-- First feature -->
-      <div class="group relative bg-white dark:bg-gray-800 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10 rounded-3xl p-8 ">
+      <div class="group relative bg-muted dark:bg-gray-800 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10 rounded-3xl p-8 ">
         <div class="space-y-2">
           <h5 class="text-xl font-semibold text-gray-700 dark:text-white transition ">
             Personalized Email Campaigns
@@ -47,7 +47,7 @@
       </div>
 
       <!-- Second feature -->
-      <div class="group relative bg-white dark:bg-gray-800 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10 rounded-3xl p-8">
+      <div class="group relative bg-muted dark:bg-gray-800 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10 rounded-3xl p-8">
         <div class="space-y-2">
           <h5 class="text-xl font-semibold text-gray-700 dark:text-white transition ">
             Automated Campaigns
