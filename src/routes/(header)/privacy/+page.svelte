@@ -1,4 +1,4 @@
-<section class="container my-20 max-w-screen-md">
+<section class="container  max-w-screen-md">
 	<h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
 		Terms and Conditions
 	</h1>

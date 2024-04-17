@@ -1,6 +1,4 @@
 <script lang="ts">
-	import Container from '@/components/Home/Container.svelte';
-
 	let isToggled = false;
 
 	function toggleNavlinks() {
@@ -13,12 +11,15 @@
 	const links: {
 		href: string;
 		label: string;
-	}[] = [];
+	}[] = [{
+		label:"Terms & Conditions",
+		href:'/privacy'
+	}];
 </script>
 
-<header>
+<header class="sticky top-0 z-10">
 	<nav
-		class="absolute z-10 w-full border-b border-black/5 dark:border-white/5 lg:border-transparent"
+		class="absolute z-10 w-full border-b backdrop-blur border-black/5 dark:border-white/5 lg:border-transparent"
 	>
 		<div class="container">
 			<div class="relative flex flex-wrap items-center justify-between gap-6 py-3 md:gap-0 md:py-4">
