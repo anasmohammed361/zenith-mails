@@ -1,0 +1,32 @@
+name: zenith-mails-deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Insall pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: true
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.10.0'
+          registry-url: 'https://registry.npmjs.org'
+          cache : 'pnpm'
+      - name: Install SST
+        uses: anasmohammed361/action-sst@main
+      - name: Deploy
+        run: sst refresh
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
