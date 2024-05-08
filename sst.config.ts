@@ -10,14 +10,12 @@ export default $config({
 			providers: {
 				aws: {
 					profile: 'default',
-          region: 'us-east-1',
+					region: 'us-east-1'
 				}
 			}
 		};
 	},
 	async run() {
-		new sst.aws.SvelteKit('ZenithWeb',{
-    
-    });
+		new sst.aws.SvelteKit('ZenithWeb', {});
 	}
 });

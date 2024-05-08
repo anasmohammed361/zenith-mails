@@ -29,6 +29,9 @@ dependencies:
   '@libsql/client':
     specifier: ^0.6.0
     version: 0.6.0
+  '@libsql/linux-x64-gnu':
+    specifier: ^0.3.18
+    version: 0.3.18
   '@trpc/client':
     specifier: ^10.45.2
     version: 10.45.2(@trpc/server@10.45.2)
@@ -2403,6 +2406,12 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /@libsql/linux-x64-gnu@0.3.18:
+    resolution: {integrity: sha512-QDSSP60nS8KIldGE7H3bpEflQHiL1erwED6huoVJdmDFxsyDJX2CYdWUWW8Za0ZUOvUbnEWAOyMhp6j1dBbZqw==}
+    cpu: [x64]
+    os: [linux]
+    dev: false
 
   /@libsql/linux-x64-musl@0.3.10:
     resolution: {integrity: sha512-kNmIRxomVwt9S+cLyYS497F/3gXFF4r8wW12YSBQgxG75JYft07AHVd8J7HINg+oqRkLzT0s+mVX5dM6nk68EQ==}
