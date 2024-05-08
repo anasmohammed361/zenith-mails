@@ -12,6 +12,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
@@ -22,11 +23,10 @@ jobs:
         uses: pnpm/action-setup@v2
         with:
           version: 8
-      
       - name: Install SST
         uses: anasmohammed361/action-sst@main
       - name: Install dependencies
-        run: pnpm install 
+        run: pnpm install
       - name: Deploy
         run: sst deploy --stage=production
         env:
