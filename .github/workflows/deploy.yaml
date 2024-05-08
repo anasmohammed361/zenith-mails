@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 name: zenith-mails-deploy
 
 on:
@@ -57,3 +58,5 @@ jobs:
           GITHUB_CLIENT_SECRET: ${{ secrets.GITHUB_CLIENT_SECRET }}
           AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
           AUTH_TRUST_HOST: ${{ secrets.AUTH_TRUST_HOST }}
+=======
+>>>>>>> c8fd889 (fix ci)
