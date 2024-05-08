@@ -5,13 +5,12 @@ export default $config({
 	app(input) {
 		return {
 			name: 'ZenithMails',
-			removal: input?.stage === 'production' ? 'retain' : 'remove',
+			removal: input?.stage === 'prod' ? 'retain' : 'remove',
 			home: 'aws',
 			providers: {
 				aws: {
 					profile: 'default',
 					region: 'us-east-1',
-					
 				},
 				
 			},
