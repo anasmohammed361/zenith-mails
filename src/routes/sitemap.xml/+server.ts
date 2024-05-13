@@ -1,5 +1,5 @@
 export async function GET() {
-    const domain = 'mailer.webzenith.tech';
+    const domain = 'mail.webzenith.tech';
     const sitemap = `<?xml version="1.0" encoding="UTF-8" ?>
         <urlset
             xmlns="https://www.sitemaps.org/schemas/sitemap/0.9"
