@@ -29,7 +29,7 @@ jobs:
       - name: Install SST
         uses: anasmohammed361/action-sst@main
         with:
-          command: 'sst deploy --stage=production'
+          command: 'sst deploy --stage=production --verbose'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
