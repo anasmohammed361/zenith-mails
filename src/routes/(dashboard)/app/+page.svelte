@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { Button } from '@/components/ui/button';
 	import { Card } from '@/components/ui/card';
 	import { Input } from '@/components/ui/input';
 	import Label from '@/components/ui/label/label.svelte';
 	import { trpc } from '@/trpc/client';
-    
+
 	import { z } from 'zod';
 	const formSchema = z.object({
 		provider: z.enum(['google', 'custom']),
@@ -35,14 +36,27 @@
 	};
 </script>
 
-<main class="">
+<main class="space-y-6">
+	<h1 class="text-4xl font-bold">Send Emails.</h1>
 	<Card class="container py-10">
 		<form class="space-y-3" on:submit|preventDefault={handleSubmit}>
 			<div>
-                <Label></Label>
-                <Input 
-                />
-            </div>
+				<Label>From Address</Label>
+				<Input name="fromAddress" type="email" placeholder="From Address" required />
+			</div>
+			<div>
+				<Label>To Address</Label>
+				<Input name="fromAddress" type="email" placeholder="From Address" required />
+			</div>
+			<div>
+				<Label>Type</Label>
+				<Input name="fromAddress" type="email" placeholder="From Address" required />
+			</div>
+			<div>
+				<Label>From Address</Label>
+				<Input name="fromAddress" type="email" placeholder="From Address" required />
+			</div>
+			<Button class="w-full" type="submit">Submit</Button>
 		</form>
 	</Card>
 </main>
