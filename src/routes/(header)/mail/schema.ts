@@ -10,7 +10,7 @@ export const formSchema = z.object({
 		.email()
 		.array()
 		.min(1)
-		.max(100, { message: 'We  support  maximum of 100 eemails.' })
+		.max(20, { message: 'We  support  maximum of 20 emails.' })
 		.default([]),
 	subject: z.string().min(5),
 	smtpPassword: z.string().length(16),

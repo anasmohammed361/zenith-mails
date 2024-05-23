@@ -1,5 +1,7 @@
 <script lang="ts">
+	import Button from "../ui/button/button.svelte";
     import Container from "./Container.svelte";
+    
 </script>
 
 
@@ -58,23 +60,24 @@
             Be part of the open-source email automation tool with analytics
           </p>
           <div class="flex flex-wrap justify-center gap-6">
-            <a
+            <Button
                 href="/mail"
-                class="relative flex h-12 w-full items-center justify-center px-8 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
+                class="relative rounded-3xl flex h-12 w-full items-center justify-center px-8 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
               >
                 <span class="relative text-base font-semibold text-white dark:text-dark"
                   >Get Started</span
                 >
-              </a>
-              <a
+              </Button>
+              <Button
+                variant={'outline'}
                 href="/mail"
-                class="relative flex h-12 w-full items-center justify-center px-8 before:absolute before:inset-0 before:rounded-full before:border before:border-transparent before:bg-primary/10 before:bg-gradient-to-b before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 dark:before:border-gray-700 dark:before:bg-gray-800 sm:w-max"
+                class="relative rounded-full flex h-12 w-full items-center justify-center px-8 before:absolute before:inset-0 before:rounded-full before:border before:border-transparent before:bg-primary/10 before:bg-gradient-to-b before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 dark:before:border-gray-700 dark:before:bg-gray-800 sm:w-max"
               >
                 <span
                   class="relative text-base font-semibold text-primary dark:text-white"
                   >More about</span
                 >
-            </a>
+            </Button>
           </div>
         </div>
       </div>

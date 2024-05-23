@@ -11,15 +11,25 @@
 	const links: {
 		href: string;
 		label: string;
-	}[] = [{
-		label:"Terms & Conditions",
-		href:'/privacy'
-	}];
+	}[] = [
+		{
+			label: 'Terms & Conditions',
+			href: '/terms'
+		},
+		{
+			label: 'Privacy Policy',
+			href: '/privacy'
+		},
+		{
+			label: 'Try Now',
+			href: '/mail'
+		}
+	];
 </script>
 
 <header class="sticky top-0 z-10">
 	<nav
-		class="absolute z-10 w-full border-b backdrop-blur border-black/5 dark:border-white/5 lg:border-transparent"
+		class="absolute z-10 w-full border-b border-black/5 backdrop-blur dark:border-white/5 lg:border-transparent"
 	>
 		<div class="container">
 			<div class="relative flex flex-wrap items-center justify-between gap-6 py-3 md:gap-0 md:py-4">
@@ -81,7 +91,7 @@
 
 					<div class="mt-12 lg:mt-0">
 						<a
-							href="/mail"
+							href="/auth"
 							class="relative flex h-9 w-full items-center justify-center px-4 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
 						>
 							<span class="relative text-sm font-semibold text-white"> Get Started</span>

@@ -5,12 +5,12 @@
 	import Icon from '@iconify/svelte';
 </script>
 
-<section class="grid min-h-screen place-items-center">
+<section class="grid min-h-[calc(100vh-16rem)]  place-items-center">
 	<div class="space-y-5">
 		<h2
 			class="scroll-m-20 text-center text-3xl font-bold tracking-tight transition-colors first:mt-0"
 		>
-			Emailer Saas
+			Zenith Mails
 		</h2>
 		<Card.Root class="w-96">
 			<Card.Header>
