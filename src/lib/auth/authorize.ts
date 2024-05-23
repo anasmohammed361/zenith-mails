@@ -1,13 +1,13 @@
 import { redirect, type Handle } from '@sveltejs/kit';
 
-const protectedRoutes = ['/dashboard'];
+const protectedRoutes = ['/app'];
 
 export const authorizationHandle: Handle = async function ({ event, resolve }) {
 	const session = await event.locals.auth();
 	if (event.url.pathname.startsWith('/auth')) {
 		if (session) {
 			// Redirect to the home page
-			throw redirect(303, '/dashboard');
+			throw redirect(303, '/app');
 		}
 	}
 	

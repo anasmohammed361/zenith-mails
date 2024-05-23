@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button';
 	import * as Card from '$lib/components/ui/card';
+	import Github from '@/components/svgs/github.svelte';
+	import Google from '@/components/svgs/google.svelte';
 	import { signIn } from '@auth/sveltekit/client';
-	import Icon from '@iconify/svelte';
+	
 </script>
 
 <section class="grid min-h-[calc(100vh-16rem)]  place-items-center">
@@ -24,7 +26,7 @@
 						signIn('google');
 					}}
 				>
-					<Icon icon="mdi:google" class="mr-2 h-5 w-5" />
+					<Google class="mr-2 h-5 w-5" />
 					Continue with Google</Button
 				>
 				<Button
@@ -33,7 +35,7 @@
 						signIn('github');
 					}}
 				>
-					<Icon icon="mdi:github" class="mr-2 h-5 w-5" />
+					<Github  class="mr-2 h-5 w-5" />
 					Continue with Github</Button
 				>
 			</Card.Content>

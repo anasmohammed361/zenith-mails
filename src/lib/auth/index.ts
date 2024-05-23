@@ -28,7 +28,11 @@ export const { handle:authenticationHandle, signIn, signOut } = SvelteKitAuth(as
 			strategy: 'jwt'
 		},
 		secret: AUTH_SECRET,
-		trustHost: true
+		trustHost: true,
+		pages:{
+			signIn: '/',
+		},
+		basePath: '/auth'
 	}
 	return authOptions;
 });
