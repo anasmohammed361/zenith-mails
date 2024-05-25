@@ -15,7 +15,8 @@
     "format": "prettier --write .",
     "lint": "prettier --check . && eslint .",
     "preview": "vite preview",
-    "dev:vite": "vite dev"
+    "dev:vite": "vite dev",
+    "deploy": "sst deploy --stage=production"
   },
   "devDependencies": {
     "@iconify/svelte": "^3.1.6",
