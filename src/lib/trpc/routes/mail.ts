@@ -1,30 +1,9 @@
-import { z } from 'zod';
 import { t } from '..';
 import { protectedProcedure } from '../procedures';
 import nodemailer from 'nodemailer'
 import { mailHistory } from '@/db/schema';
+import { formSchema } from '../../../routes/(dashboard)/app/schema';
 type MailHistory = typeof mailHistory.$inferInsert;
-const formSchema = z.object({
-	provider: z.enum(['google', 'custom']),
-	contentType: z.enum(['text', 'html']).default('text'),
-	content: z.string().min(5),
-	fromAddress: z.string(),
-	toAddresses: z
-		.string()
-		.email()
-		.array()
-		.min(1)
-		.max(20, { message: 'We  support  maximum of 50 emails.' })
-		.default([]),
-	subject: z.string().min(5),
-	smtpPassword: z.string().length(16),
-	smtpUserName: z.string().email(),
-	attachments: z.string().url().array().default([]),
-	smtpHost: z.string(),
-	smtpPort: z.number(),
-	ssl: z.boolean()
-});
-
 export const mailRouter = t.router({
 	sendBulkMails: protectedProcedure.input(formSchema).mutation(async ({ ctx, input }) => {
 		const db = ctx.db;
@@ -53,7 +32,7 @@ export const mailRouter = t.router({
 
 
 				const result = await transport.sendMail({
-					from: input.fromAddress,
+					from: `${input.fromName} <${input.fromAddress}>`,
 					to: input.toAddresses,
 					subject: input.subject,
 					text: input.contentType === 'text' ? input.content : undefined,
@@ -64,13 +43,15 @@ export const mailRouter = t.router({
 						};
 					}),
 				})
-
+				console.log({ result });
+				
 				result.accepted.forEach((to) => {
 					mailHistoryData.toAddresses.push({
 						to,
 						status: "success"
 					})
 				})
+
 				result.rejected.forEach((to) => {
 					mailHistoryData.toAddresses.push({
 						to,
@@ -107,6 +88,8 @@ export const mailRouter = t.router({
 					html: input.contentType === 'html' ? input.content : undefined,
 				})
 
+				console.log({ res });
+				
 				res.accepted.forEach((to) => {
 					mailHistoryData.toAddresses.push({
 						to,
@@ -130,6 +113,7 @@ export const mailRouter = t.router({
 				message: `${mailHistoryData.toAddresses.filter(e => e.status === "success").length} mails sent successfully , ${mailHistoryData.toAddresses.filter(e => e.status === "failed").length} mails were unsuccessful .`
 			}
 		} catch (error) {
+			console.error(error)
 			return {
 				message: "Failed to send mail"
 			}

@@ -16,6 +16,7 @@
 	import Template from '../svgs/template.svelte';
 	import Hamburger from '../svgs/hamburger.svelte';
 	import SendMail from '../svgs/send-mail.svelte';
+	import ThemeSwitcher from '../globals/theme-switcher.svelte';
 
 	const sideBarItems: {
 		title: string;
@@ -58,9 +59,9 @@
 	export let session: Session | undefined | null = undefined;
 </script>
 
-<div class="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
+<div class="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr] no-scrollbar overflow-y-hidden">
 	<div class="hidden border-r bg-muted/40 md:block">
-		<div class="flex h-full max-h-screen flex-col gap-2">
+		<div class="flex h-full  max-h-screen flex-col gap-2">
 			<div class="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
 				<a href="/" class="flex items-center gap-2 font-semibold">
 					<!-- <Package2 class="h-6 w-6" /> -->
@@ -198,12 +199,13 @@
 				</DropdownMenu.Trigger>
 				<DropdownMenu.Content align="end">
 					<DropdownMenu.Label
-						><div class="flex flex-col space-y-1">
-							<p class="text-sm font-medium leading-none">{session?.user?.name}</p>
-							<p class="text-xs leading-none text-muted-foreground">{session?.user?.email}</p>
-						</div></DropdownMenu.Label
+					><div class="flex flex-col space-y-1">
+						<p class="text-sm font-medium leading-none">{session?.user?.name}</p>
+						<p class="text-xs leading-none text-muted-foreground">{session?.user?.email}</p>
+					</div></DropdownMenu.Label
 					>
 					<DropdownMenu.Separator />
+					<ThemeSwitcher/>
 					<DropdownMenu.Item
 						on:click={() => {
 							signOut();
@@ -212,7 +214,7 @@
 				</DropdownMenu.Content>
 			</DropdownMenu.Root>
 		</header>
-		<main class="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
+		<main class="flex flex-1 flex-col gap-4 p-4 lg:gap-6 overflow-y-scroll max-h-[calc(100vh-4rem)] lg:p-6" id="custom-scrollbar">
 			<slot />
 		</main>
 	</div>

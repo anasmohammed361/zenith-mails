@@ -45,9 +45,9 @@
 		--input: 217.2 32.6% 17.5%;
 		--ring: 224.3 76.3% 48%;
 	}
-  .filepond--panel-root {
-    background-color: var(--accent) !important;
-  }
+	.filepond--panel-root {
+		background-color: var(--accent) !important;
+	}
 }
 @layer base {
 	* {
@@ -58,8 +58,32 @@
 	}
 }
 
-
 html {
 	scroll-behavior: smooth;
-  }
-  
+}
+
+body ,#custom-scrollbar {
+	/* --sb-track-color: 0 0% 100%; */
+	--sb-thumb-color: #2563eb;
+	--sb-size: 4px;
+}
+
+body::-webkit-scrollbar  ,#custom-scrollbar::-webkit-scrollbar {
+	width: var(--sb-size);
+}
+
+body::-webkit-scrollbar-track ,#custom-scrollbar::-webkit-scrollbar-track {
+	/* background: var(--sb-track-color); */
+	border-radius: 3px;
+}
+
+body::-webkit-scrollbar-thumb ,#custom-scrollbar::-webkit-scrollbar-thumb {
+	background: var(--sb-thumb-color);
+	border-radius: 3px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+	body,#custom-scrollbar {
+		scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+	}
+}

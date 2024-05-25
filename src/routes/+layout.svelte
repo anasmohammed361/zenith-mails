@@ -5,7 +5,20 @@
 	import { Toaster } from '$lib/components/ui/sonner';
 	import { ModeWatcher } from 'mode-watcher';
 	import SvelteSeo from 'svelte-seo';
+	import { partytownSnippet } from '@builder.io/partytown/integration';
+	import { dev } from '$app/environment';
 </script>
+
+<svelte:head>
+	{@html '<script>' + partytownSnippet() + '</script>'}
+	{#if !dev}
+		<script
+			type="text/partytown"
+			src="https://analytics.webzenith.tech/script.js"
+			data-website-id="44d7d1bd-82c6-4030-9d15-82a4533d8d4a"
+		></script>
+	{/if}
+</svelte:head>
 
 <SvelteSeo
 	title="ZenithMails | Send Automated Mails"
@@ -36,8 +49,7 @@
 			}
 		],
 		site_name: 'ZenithMails',
-		locale: 'en_US',
-
+		locale: 'en_US'
 	}}
 	applicationName={'ZenithMails'}
 	jsonLd={{
@@ -48,7 +60,6 @@
 		description:
 			'Elevate your email game with Zenith Mails, the open-source email automation tool. Send personalized emails, automate campaigns, and track performance with ease.',
 		url: 'https://mail.webzneith.tech/'
-
 	}}
 />
 

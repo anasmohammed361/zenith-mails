@@ -4,6 +4,8 @@ const protectedRoutes = ['/app'];
 
 export const authorizationHandle: Handle = async function ({ event, resolve }) {
 	const session = await event.locals.auth();
+	console.log({ session });
+	
 	if (event.url.pathname.startsWith('/auth')) {
 		if (session) {
 			// Redirect to the home page
