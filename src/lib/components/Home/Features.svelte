@@ -4,7 +4,7 @@
   
 </script>
 
-<div class=" pb-20" id="features">
+<div class=" py-20" id="features">
   <Container>
     <div class="md:w-2/3 lg:w-1/2">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"

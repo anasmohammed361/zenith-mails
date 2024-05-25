@@ -4,7 +4,7 @@ import type { AdapterAccount } from '@auth/core/adapters';
 export const users = sqliteTable('user', {
 	id: text('id').notNull().primaryKey(),
 	name: text('name'),
-	email: text('email').notNull(),
+	email: text('email').notNull().unique(),
 	emailVerified: integer('emailVerified', { mode: 'timestamp_ms' }),
 	image: text('image')
 });
@@ -52,3 +52,20 @@ export const verificationTokens = sqliteTable(
 		compoundKey: primaryKey({ columns: [vt.identifier, vt.token] })
 	})
 );
+
+export const mailHistory = sqliteTable('mailHistory', {
+	id: integer('id').notNull().primaryKey({autoIncrement:true}),
+	provider: text('provider').notNull().$type<'google'|'custom'>(),
+	fromAddress: text('fromAddress').notNull(),
+	toAddresses: text('toAddresses',{mode:"json"}).notNull().$type<{
+		to:string;
+		status:'success'|'failed';
+		message?:string;
+	}[]>(),
+	subject: text('subject').notNull(),
+	content: text('content').notNull(),
+	sentAt: integer('sentAt',{mode:"timestamp"}).notNull().$defaultFn(()=>new Date()),
+	sentUserId: text('sentUserId').notNull().references(()=>users.id,{onDelete:"cascade"}),
+	attachments: text('attachments',{mode:"json"}).$type<string[]>().notNull(),
+	type: text('type').notNull().$type<'text'|'html'>()
+});

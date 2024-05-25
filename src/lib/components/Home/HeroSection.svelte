@@ -1,5 +1,7 @@
 <script lang="ts">
+	import Button from '../ui/button/button.svelte';
 	import Container from './Container.svelte';
+	
 </script>
 
 <div class="relative" id="home">
@@ -27,20 +29,21 @@
 					Elevate your email game with Zenith Mails, the open-source email automation tool. Send personalized emails, automate campaigns, and track performance with ease.
 				</p>
 				<div class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-4">
-					<a
-						href="/mail"
-						class="relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
+					<Button
+						href="/auth"
+						class="relative rounded-3xl flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
 					>
 						<span class="relative text-base font-semibold text-white">Get started</span>
-					</a>
-					<a
-						href="/mail"
-						class="relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:border before:border-transparent before:bg-primary/10 before:bg-gradient-to-b before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 dark:before:border-gray-700 dark:before:bg-gray-800 sm:w-max"
+					</Button>
+					<Button
+						variant="outline"
+						href="#features"
+						class="relative rounded-3xl flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:border before:border-transparent before:bg-primary/10 before:bg-gradient-to-b before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 dark:before:border-gray-700 dark:before:bg-gray-800 sm:w-max"
 					>
 						<span class="relative text-base font-semibold text-primary dark:text-white"
 							>Learn more</span
 						>
-					</a>
+					</Button>
 				</div>
 				<div
 					class="mt-16 hidden justify-between border-y border-gray-100 py-8 dark:border-gray-800 sm:flex"

@@ -12,7 +12,6 @@
 	import Button from '../button/button.svelte';
 	import * as Tooltip from '$lib/components/ui/tooltip/index.js';
 	import { Label } from '../label';
-	import { buttonVariants } from '../button';
 	export let form: SuperForm<
 		{
 			toAddresses: string[];

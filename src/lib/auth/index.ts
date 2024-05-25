@@ -2,6 +2,7 @@ import { SvelteKitAuth, type SvelteKitAuthConfig } from '@auth/sveltekit';
 import GOOGLE from '@auth/sveltekit/providers/google';
 import GiTHUB from '@auth/sveltekit/providers/github';
 import { DrizzleAdapter } from '@auth/drizzle-adapter';
+
 import {
 	GOOGLE_CLIENT_ID,
 	GOOGLE_CLIENT_SECRET,
@@ -11,8 +12,15 @@ import {
 } from '$env/static/private';
 import { db } from '@/db/index.server';
 
-export const { handle:authenticationHandle, signIn, signOut } = SvelteKitAuth(async ()=>{
-	const authOptions:SvelteKitAuthConfig={
+declare module "@auth/core/jwt" {
+	interface JWT extends DefaultJWT {
+		id: string
+	}
+}
+
+
+export const { handle: authenticationHandle, signIn, signOut } = SvelteKitAuth(async () => {
+	const authOptions: SvelteKitAuthConfig = {
 		adapter: DrizzleAdapter(db),
 		providers: [
 			GOOGLE({
@@ -28,7 +36,24 @@ export const { handle:authenticationHandle, signIn, signOut } = SvelteKitAuth(as
 			strategy: 'jwt'
 		},
 		secret: AUTH_SECRET,
-		trustHost: true
+		trustHost: true,
+		pages: {
+			signIn: '/',
+		},
+		basePath: '/auth',
+		callbacks: {
+			session({ session, token }) {
+				session.user.id = token.id as string;
+				token
+				return session
+			},
+			jwt({ user, token }) {
+				if (user) {
+					token.id = user.id
+				}
+				return token
+			}
+		}
 	}
 	return authOptions;
 });
